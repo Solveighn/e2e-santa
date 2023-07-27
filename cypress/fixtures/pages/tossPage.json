@@ -1,0 +1,8 @@
+{
+    "options": "#root > div.layout-1 > section.layout-1__header-wrapper-fixed > div.layout-1__header-secondary.header-secondary-wrapper.header-secondary-wrapper--shadow > section > div.header-secondary__right-item > div > div.base--clickable.toggle-menu-button > div",
+    "tossOption": "#root > div.layout-1 > section.layout-1__header-wrapper-fixed > div.layout-1__header-secondary__menu.header-secondary-menu--wrapper > section > div.organizer-menu.organizer-menu--opened > div.organizer-menu__wrapper > div:nth-child(2)",
+    "tossButton": "#root > div.layout-1 > section.layout-1__main-wrapper > div.layout-1__main > section > div > section > div > div > div.heading > div.heading__right > div",
+    "tossModalWindow": "#root > div.santa-modal.santa-modal--opened > div.santa-modal_content",
+    "anotherTossButton": "#root > div.santa-modal.santa-modal--opened > div.santa-modal_content > div.santa-modal_content_buttons > div.btn-main.base--clickable",
+    "resultText": "#root > div.layout-1 > section.layout-1__main-wrapper > div.layout-1__main > section > div > section > div > div > div > span.picture-notice__title.txt-h3--semi.txt"
+}

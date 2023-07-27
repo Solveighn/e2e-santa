@@ -3,8 +3,8 @@ const boxPage = require("../fixtures/pages/boxPage.json");
 const generalElements = require("../fixtures/pages/general.json");
 const dashboardPage = require("../fixtures/pages/dashboardPage.json");
 const invitePage = require("../fixtures/pages/invitePage.json");
-const inviteeBoxPage = require("../fixtures/pages/inviteeBoxPage.json");
-const inviteeDashboardPage = require("../fixtures/pages/inviteeDashboardPage.json");
+const tossPage = require("../fixtures/pages/tossPage.json");
+
 import { faker } from "@faker-js/faker";
 
 describe("user can create a box and run it", () => {
@@ -87,6 +87,19 @@ describe("user can create a box and run it", () => {
     cy.wait(500);
     cy.createParticipantCard();
   });
+
+  it("make toss", () => {
+    cy.visit("/login");
+    cy.login(users.userAutor.email, users.userAutor.password);
+    let boxLink = inviteLink.split("card?")[0];
+    cy.visit(boxLink);
+    cy.get(tossPage.options).click({ force: true });
+    cy.get(tossPage.tossOption).click({force: true});
+    cy.get(tossPage.tossButton).click({force: true});
+    cy.get(tossPage.tossModalWindow).should("exist");
+    cy.get(tossPage.anotherTossButton).click({force: true});
+    cy.get(tossPage.resultText).should("have.text", "Жеребьевка проведена");
+  })
 
   it("delete box", () => {
     cy.deleteBox();

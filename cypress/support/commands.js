@@ -28,8 +28,6 @@ const users = require("../fixtures/users.json");
 const boxPage = require("../fixtures/pages/boxPage.json");
 const loginPage = require("../fixtures/pages/loginPage.json");
 const generalElements = require("../fixtures/pages/general.json");
-const dashboardPage = require("../fixtures/pages/dashboardPage.json");
-const invitePage = require("../fixtures/pages/invitePage.json");
 const inviteeBoxPage = require("../fixtures/pages/inviteeBoxPage.json");
 const inviteeDashboardPage = require("../fixtures/pages/inviteeDashboardPage.json");
 import { faker } from "@faker-js/faker";
