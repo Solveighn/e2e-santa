@@ -8,22 +8,12 @@ const tossPage = require("../fixtures/pages/tossPage.json");
 import { faker } from "@faker-js/faker";
 
 describe("user can create a box and run it", () => {
-  //пользователь 1 логинится
-  //пользователь 1 создает коробку
-  //пользователь 1 получает приглашение
-  //пользователь 2 переходит по приглашению
-  //пользователь 2 заполняет анкету
-  //пользователь 3 переходит по приглашению
-  //пользователь 3 заполняет анкету
-  //пользователь 4 переходит по приглашению
-  //пользователь 4 заполняет анкету
-  //пользователь 1 логинится
-  //пользователь 1 запускает жеребьевку
+
   let newBoxName = faker.word.noun({ length: { min: 5, max: 10 } });
-  let wishes = faker.word.noun() + faker.word.adverb() + faker.word.adjective();
   let maxAmount = 50;
   let currency = "Евро";
   let inviteLink;
+  let santaCookie = "jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMwMDE0NDYsImlhdCI6MTY5MDQ4ODQxMiwiZXhwIjoxNjkwNDkyMDEyfQ.NbjdZphYDZJcLkMWI3ciJ7ha5QSnVnWIWvIPTAMm8pg; Max-Age=3600; Path=/; Expires=Thu, 27 Jul 2023 21:06:52 GMT; HttpOnly";
 
   it("user logins and create a box", () => {
     cy.visit("/login");
@@ -62,9 +52,7 @@ describe("user can create a box and run it", () => {
     cy.visit(inviteLink);
     cy.get(generalElements.submitButton).click({ force: true });
     cy.contains("войдите").click();
-    cy.wait(500);
     cy.login(users.user1.email, users.user1.password);
-    cy.wait(500);
     cy.createParticipantCard();
   });
 
@@ -72,9 +60,7 @@ describe("user can create a box and run it", () => {
     cy.visit(inviteLink);
     cy.get(generalElements.submitButton).click({ force: true });
     cy.contains("войдите").click();
-    cy.wait(500);
     cy.login(users.user2.email, users.user2.password);
-    cy.wait(500);
     cy.createParticipantCard();
   });
 
@@ -82,9 +68,7 @@ describe("user can create a box and run it", () => {
     cy.visit(inviteLink);
     cy.get(generalElements.submitButton).click({ force: true });
     cy.contains("войдите").click();
-    cy.wait(500);
     cy.login(users.user3.email, users.user3.password);
-    cy.wait(500);
     cy.createParticipantCard();
   });
 
@@ -99,9 +83,21 @@ describe("user can create a box and run it", () => {
     cy.get(tossPage.tossModalWindow).should("exist");
     cy.get(tossPage.anotherTossButton).click({force: true});
     cy.get(tossPage.resultText).should("have.text", "Жеребьевка проведена");
-  })
-
-  it("delete box", () => {
-    cy.deleteBox();
   });
+
+  after ("delete box", () => {
+    let boxLink = inviteLink.split("/card?")[0];
+    let boxArray = boxLink.split("/");
+    let boxId = boxArray[boxArray.length - 1];
+    cy.request({
+        method: "DELETE",
+        headers: {
+            Cookie: santaCookie
+        },
+        url: "/" +"api/box/" + boxId
+    }).then((response) => {
+
+        expect(response.status).to.equal(200);
+    })        
+})
 });
