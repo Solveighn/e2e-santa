@@ -56,7 +56,6 @@ Cypress.Commands.add("createParticipantCard", () => {
     .then((text) => {
       expect(text).to.contain("Это — анонимный чат с вашим Тайным Сантой");
     });
-  cy.clearCookies();
 });
 
 Cypress.Commands.add("deleteBox", () => {
